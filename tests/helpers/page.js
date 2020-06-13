@@ -39,21 +39,22 @@ class CustomPage {
         return this.page.$eval(selector, el => el.innerHTML)
     }
 
-    httpGet(url) {
+    get(path) {
         return this.page.evaluate(
-            (_url) => {
-                return fetch(_url, {
+            (_path) => {
+                return fetch(_path, {
                     method: 'GET',
                     credentials: 'same-origin',
                 }).then(res => res.json())
-            }   
-        , url)
+            }, 
+            path
+        )
     }
 
-    httpPost(url, data) {
+    post(path, data) {
         return this.page.evaluate(
-            (_url, _data) => {
-                return fetch(_url, {
+            (_path, _data) => {
+                return fetch(_path, {
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {
@@ -61,8 +62,18 @@ class CustomPage {
                     },
                     body: JSON.stringify(_data)
                 }).then(res => res.json())
-            }
-        , url, data)
+            }, 
+            path, 
+            data
+        )
+    }
+
+    execHttpRequests(actions) {
+        return Promise.all(
+            actions.map( ({ method, path, data }) => {
+                return this[method](path, data) 
+            })
+        )
     }
 }
 
