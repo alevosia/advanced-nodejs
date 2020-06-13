@@ -35,6 +35,6 @@ module.exports = (app) => {
 			res.send(400, err)
 		}
 
-		clearHash(req.user.id)
+		clearCache(req.user.id)
 	})
 }

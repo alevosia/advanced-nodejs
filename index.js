@@ -18,13 +18,20 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: tru
 const app = express();
 
 app.use(express.json());
+// Turn cookie data and signature from request's headers
+// into JS Object and assign to [req.session]
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey]
   })
 );
+
+// Initiliaze passport
 app.use(passport.initialize());
+// Checks req.session for [req.session.passport.user] and
+// if an id is stored in the user object, pass it to passport.deserializeUser
+// to look for a user with the same id and assign the user object to [req.user]
 app.use(passport.session());
 app.use(morgan('dev'))
 
