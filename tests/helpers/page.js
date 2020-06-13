@@ -38,6 +38,32 @@ class CustomPage {
     getInnerHTML(selector) {
         return this.page.$eval(selector, el => el.innerHTML)
     }
+
+    httpGet(url) {
+        return this.page.evaluate(
+            (_url) => {
+                return fetch(_url, {
+                    method: 'GET',
+                    credentials: 'same-origin',
+                }).then(res => res.json())
+            }   
+        , url)
+    }
+
+    httpPost(url, data) {
+        return this.page.evaluate(
+            (_url, _data) => {
+                return fetch(_url, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(_data)
+                }).then(res => res.json())
+            }
+        , url, data)
+    }
 }
 
 module.exports = CustomPage

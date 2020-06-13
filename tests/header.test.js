@@ -53,7 +53,7 @@ describe('When not logged in', () => {
         })
     
         test('starts Google OAuth flow when clicked', async () => {
-            await page.click('.right a')
+        	await page.click('.right a')
             const url = await page.url()
             expect(url).toMatch(/accounts\.google\.com/)
         })

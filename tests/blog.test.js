@@ -67,3 +67,32 @@ describe('When logged in and add blog post is clicked', () => {
         })
     })
 })
+
+describe('When not logged in', () => {
+    beforeEach(async () => {
+        page = await Page.build({ headless: true })
+        await page.goto('http://localhost:3000')
+    })
+    
+    afterEach(async () => {
+        await page.close()
+    })
+    
+    afterAll(async () => {
+        await mongoose.connection.close();
+    });
+
+    test('user cannot create a blog post', async () => {
+        const response = await page.httpPost(
+            '/api/blogs', 
+            { title: 'Test Valid Title', content: 'Test Valid Content' }
+        )
+
+        expect(response).toEqual({ error: 'You must log in!' })
+    })
+
+    test('user cannot fetch blog posts', async () => {
+        const response = await page.httpGet('/api/blogs')
+        expect(response).toEqual({ error: 'You must log in!' })
+    })
+})
