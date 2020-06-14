@@ -15,6 +15,6 @@ install: # project setup
     - npm install
     - npm run build
 script:
-    - npm start
-    - sleep 3
-    - npm test
+    - nohup npm run start &
+    - sleep 5
+    - npm run test
