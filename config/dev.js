@@ -1,6 +1,6 @@
 module.exports = {
-    googleClientID: process.env.DEV_GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.DEV_GOOGLE_CLIENT_SECRET,
+    googleClientID: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     mongoURI: 'mongodb://localhost:27017/advanced-nodejs',
     redisUrl: 'redis://localhost:6379',
     cookieKey: '123123123',
