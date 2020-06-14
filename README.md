@@ -1,4 +1,6 @@
-# Advanced Node.JS
+# Advanced Node.JS 
+
+[![Build Status](https://travis-ci.org/alevosia/advanced-nodejs.svg?branch=master)](https://travis-ci.org/alevosia/advanced-nodejs)
 
 -   Redis Caching
 -   Automated Headless Browser Testing
