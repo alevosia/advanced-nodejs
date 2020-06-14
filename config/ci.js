@@ -1,7 +1,13 @@
 module.exports = {
-    googleClientID: '70265989829-0t7m7ce5crs6scqd3t0t6g7pv83ncaii.apps.googleusercontent.com',
-    googleClientSecret: '8mkniDQOqacXtlRD3gA4n2az',
+    googleClientID: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     mongoURI: 'mongodb://127.0.0.1:27017/blog_ci',
+    redisUrl: 'redis://127.0.0.1:6379',
     cookieKey: '123123123',
-    redisUrl: 'redis://127.0.0.1:6379'
+    aws: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        region: 'ap-southeast-1',
+        bucket: 'advanced-nodejs-tutorial'
+    }
 };

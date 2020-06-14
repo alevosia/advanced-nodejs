@@ -35,8 +35,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(morgan('dev'))
 
-require('./routes/authRoutes')(app);
-require('./routes/blogRoutes')(app);
+require('./routes/auth')(app);
+require('./routes/blog')(app);
+require('./routes/upload')(app);
 
 if (['production', 'ci'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
