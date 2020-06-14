@@ -4,7 +4,7 @@ node_js:
 dist: trusty # OS
 services:
     - mongodb
-    - redis-server
+    - redis
 env:
     - NODE_ENV=ci PORT=3000
 cache: # cache installs
@@ -15,6 +15,6 @@ install: # project setup
     - npm install
     - npm run build
 script:
-    - nohup npm run start &
+    - npm start
     - sleep 3
-    - npm run test
+    - npm test
