@@ -5,7 +5,10 @@ const makeUser = require('../factories/user')
 
 class CustomPage {
     static async build(options = { headless: true }) {
-        const browser = await puppeteer.launch({ headless: options.headless })
+        const browser = await puppeteer.launch({ 
+            headless: options.headless,
+            args: ['--no-sandbox']
+        })
 
         const page = await browser.newPage()
 
