@@ -6,7 +6,7 @@ services:
     - mongodb
     - redis
 env:
-    - NODE_ENV=ci PORT=3000
+    - NODE_ENV=ci PORT=3000 FORCE_COLOR=true
 cache: # cache installs
     directories:
         - node_modules
