@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const PORT = process.env.PORT || 5000;
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
@@ -18,6 +20,7 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: tru
 const app = express();
 
 app.use(express.json());
+
 // Turn cookie data and signature from request's headers
 // into JS Object and assign to [req.session]
 app.use(
@@ -29,11 +32,11 @@ app.use(
 
 // Initiliaze passport
 app.use(passport.initialize());
+
 // Checks req.session for [req.session.passport.user] and
 // if an id is stored in the user object, pass it to passport.deserializeUser
 // to look for a user with the same id and assign the user object to [req.user]
 app.use(passport.session());
-app.use(morgan('dev'))
 
 require('./routes/auth')(app);
 require('./routes/blog')(app);
@@ -46,9 +49,11 @@ if (['production', 'ci'].includes(process.env.NODE_ENV)) {
   app.get('*', (_, res) => {
     res.sendFile(path.resolve('client', 'build', 'index.html'));
   });
+} else {
+  // development
+  app.use(morgan('dev'))
 }
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port`, PORT);
 });
